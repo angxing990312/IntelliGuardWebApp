@@ -26,6 +26,7 @@ namespace maddweb.Models
         public string UPhotoPath { get; set; }
         public int UserContact { get; set; }
         public string Role { get; set; }
+        public string nric { get; set; }
 
         public virtual ICollection<Entry> Entry { get; set; }
     }
