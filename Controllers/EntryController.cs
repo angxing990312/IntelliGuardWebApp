@@ -63,5 +63,14 @@ namespace maddweb.Controllers
 			else
 				return BadRequest(new { Message = DBUtl.DB_Message });
 		}
+
+		[HttpGet]
+
+		[Route("api/AllTracingInfo")]
+		public IActionResult AllTracingInfo()
+		{
+			List<TracingInfo> dbList = DBUtl.GetList<TracingInfo>($"Select * from TracingInfo");
+			return Json(dbList);
+		}
 	}
 }
