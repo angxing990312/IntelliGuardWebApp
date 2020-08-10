@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Face Login
+    </title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Face Login</title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/uploaduser.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+
+        html, body {
+            background: #000;
+        }
+
+        text {
+            color: white;
+        }
+
+        a {
+            color: #ff6a00;
+        }
+
+        #vid-take:hover {
+            cursor: pointer;
+            background: #edcb8c;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" style="margin-top:5%;margin-left:20%;margin-right:20%">
+        <h1 style="color:white;margin-bottom:20px;">Hi! Please look at the camera &#128515;</h1>
+        @{if (TempData["Message"] != null)
+            {
+                var message = TempData["Message"];
+
+                if (message.ToString() == "No person in the Webcam")
+                {
+                    <div>
+                        <text style="font-family:cursive; font-size:100%">No one is looking at the camera &#128555;<a href="/Account/login" style="font-size:100%">click here</a> to login by id and password</text>
+                    </div>
+                }
+                else if (message.ToString() == "One person at a time please")
+                {
+                    <div>
+                        <text style="font-family:cursive; font-size:100%">One person at one time please&#128563;<a href="/Account/login" style="font-size:100%">click here</a> to login by id and password</text>
+                    </div>
+                }
+                else if (message.ToString() == "No One Identified")
+                {
+                    <div>
+                        <text style="font-family:cursive; font-size:100%">No one identified&#128563; <a href="/Account/login" style="font-size:100%">click here</a> to login by id and password</text>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <text>message</text>
+                    </div>
+                }
+
+
+            }}
+        <div id="vid-controls" style="margin-top:10px;">
+            <video id="vid-show" autoplay></video>
+            <div class="row">
+                <input id="vid-take" type="button" value="Login" class="btn btn-primary" style="border-radius:20px; border:none;outline:none; height:60px; text-decoration:none;font-size:20px; line-height:40px; margin-left:13%; width:30%;margin-bottom:20px; margin-top:20px;" />
+            </div>
+            <div id="vid-canvas"></div>
+        </div>
+    </div>
+
+
+</body>
+</html>

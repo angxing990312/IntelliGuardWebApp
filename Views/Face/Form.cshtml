@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+	<meta name="viewport" content="width=device-width" />
+	<title>M.A.D.D</title>
+	<link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="~/lib/jquery/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+	<link href="~/lib/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
+	<link href="~/lib/font-awesome/css/brands.min.css" rel="stylesheet" />
+	<link href="~/lib/font-awesome/css/solid.min.css" rel="stylesheet" />
+	<link href="~/css/StyleSheet.css" type="text/css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+	<script src="~/js/JavaScript.js"></script>
+	<link href="~/css/madd.css" type="text/css" rel="stylesheet" />
+	<link href="~/css/snow.css" type="text/css" rel="stylesheet" />
+	<script src="~/lib/upload.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<script>
+
+		setInterval(function () {
+			$.ajax({
+				url: "https://maddintelliguard.azurewebsites.net/Face/Getrecords",
+				success: function (response) {
+					$('#RecordForm').html(response);
+				}
+
+			});
+
+
+
+		}, 3000);
+
+		var video = document.querySelector("#vid-show");
+
+		if (navigator.mediaDevices.getUserMedia) {
+			navigator.mediaDevices.getUserMedia({ video: true })
+				.then(function (stream) {
+					video.srcObject = stream;
+				})
+				.catch(function (err0r) {
+					console.log("Something went wrong!");
+				});
+		}
+
+
+	</script>
+	<style>
+
+		#logo {
+			position: absolute;
+			top: 10px;
+			left: 500px;
+			width: 120px;
+			height: 120px;
+		}
+
+		#form {
+			position: absolute;
+			top: 10px;
+			left: 100px;
+		}
+
+		body {
+			background-color: white;
+		}
+	</style>
+</head>
+<body style="background-color:white">
+
+
+	<div id="form">
+		<h2 style="color:royalblue;margin-left:10%; margin-top:5%;">Hi, please look at the camera</h2>
+
+
+		<div class="contain" style=" margin-left:10%;margin-top:2%;">
+			<div style="float:left">
+				<video id="vid-show" autoplay class="border" style=""></video>
+			</div>
+
+			<div style="margin-top:10px;" id="block1">
+				<div class="row">
+
+					<form style="margin-left:20px;">
+
+
+						<fieldset>
+							<div id="RecordForm">
+								<h4><label style="color:royalblue;">Full name</label></h4>
+								<input type="text" placeholder="">
+
+
+								<h4>
+									<label style="color:royalblue;">Temperature</label>
+								</h4>
+								<input type="text" placeholder="  °C" style="color:forestgreen">
+
+
+
+
+
+								<h4>
+									<label style="color:royalblue;">
+										Time
+									</label>
+								</h4>
+								<input type="text" placeholder="">
+
+							</div>
+
+							<h4><label for="firstName" style="color:royalblue;">Location</label></h4>
+							<input type="text" name="name" id="firstName" placeholder="@TempData["location"]">
+
+						</fieldset>
+
+
+
+
+					</form>
+
+				</div>
+
+			</div>
+			<img id="logo" src="~/theme/IntelliGuardLogo.jpg" />
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,30 @@
+﻿@model MaddUser
+<link href="~/css/loginform.css" type="text/css" rel="stylesheet" />
+@if (ViewData["Message"] != null)
+{
+    <h2>@ViewData["Message"]</h2>
+}
+<form asp-controller="Account"
+      asp-action="login" method="post">
+    <div class="form">
+        <div class="form-toggle"></div>
+        <div class="form-panel one">
+            <div class="form-header">
+                <h1>Account Login</h1>
+            </div>
+            <div class="form-content">
+
+                <div class="form-group"><label asp-for="UserName">Username</label><input type="text" id="username" required="required" asp-for="UserName" /></div>
+                <div class="form-group"><label asp-for="UserPw">Password</label><input type="password" id="password" asp-for="UserPw" required="required" /></div>
+                <div class="form-group"><a class="form-recovery" href="#">Don't Have Account?</a></div>
+                <div class="form-group"><a class="form-recovery" href="/Face/index">Wanna login through face ID?</a></div>
+               
+                <div class="form-group"><button type="submit">Log In</button></div>
+
+            </div>
+        </div>
+        <div class="form-panel two">
+
+        </div>
+    </div>
+</form>
