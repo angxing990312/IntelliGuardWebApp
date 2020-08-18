@@ -1,0 +1,107 @@
+﻿@model DataRowCollection
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>MADD-Admin</title>
+        <!-- core:css -->
+        <link rel="stylesheet" href="~/assets/vendors/core/core.css">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <link rel="stylesheet" href="~/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+        <!-- end plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" href="~/assets/fonts/feather-font/css/iconfont.css">
+        <link rel="stylesheet" href="~/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+        <!-- endinject -->
+        <!-- Layout styles -->
+        <link rel="stylesheet" href="~/assets/css/demo_1/style.css">
+        <!-- End layout styles -->
+        <link rel="shortcut icon" href="~/assets/images/favicon.png" />
+    </head>
+    <body>
+
+        <div class="page-content">
+
+            <nav class="page-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">TracingRecords</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">View All</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">All Entry Records</h6>
+                            <div class="table-responsive">
+                                <table id="dataTableExample5" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Record ID</th>
+                                            <th>Location</th>
+                                            <th>NRIC</th>
+                                            <th>Contact Number</th>
+                                            <th>Status</th>
+                                            <th>Entry Time</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (DataRow row in Model)
+                                        {
+										<tr>
+											<td>@row["id"]</td>
+											<td>@row["location"]</td>
+											<td>@row["nric"]</td>
+
+											<td>@row["contact"]</td>
+											<td>@row["status"]</td>
+
+											@{
+												string time = String.Format("{0:yyyy-MM-dd hh:mm:ss}", row["entrytime"]);
+											}
+											<td>@time</td>
+										</tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <p class="text-muted text-center text-md-left">MADD-IntelliGuard</p>
+
+        </footer>
+        <!-- partial -->
+
+
+        <!-- core:js -->
+        <script src="~/assets/vendors/core/core.js"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script src="~/assets/vendors/datatables.net/jquery.dataTables.js"></script>
+        <script src="~/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+        <!-- end plugin js for this page -->
+        <!-- inject:js -->
+        <script src="~/assets/vendors/feather-icons/feather.min.js"></script>
+        <script src="~/assets/js/template.js"></script>
+        <!-- endinject -->
+        <!-- custom js for this page -->
+        <script src="~/assets/js/data-table.js"></script>
+        <!-- end custom js for this page -->
+    </body>
+</html>

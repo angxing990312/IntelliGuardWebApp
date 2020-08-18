@@ -134,6 +134,17 @@ namespace maddweb.Controllers
             return View();
         }
 
+        public IActionResult ViewAllTracingInfo()
+        {
+            //string userName = User.FindFirst(ClaimTypes.Name).Value;
+            //ViewData["name"] = userName;
+
+            string sql = "select * from TracingInfo";
+            DataTable dt = DBUtl.GetTable(sql);
+            return View(dt.Rows);
+
+        }
+
 
 
 
