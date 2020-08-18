@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using maddweb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,6 +19,14 @@ namespace maddweb.Controllers
     [Route("api/mobile")]
     public class MobileApiController : Controller
     {
+
+        private AppDbContext _dbContext;
+
+        public MobileApiController(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         // GET: api/<controller>
         [HttpGet("GetPastWeekCases")]
         public IActionResult GetPastWeekCases()
@@ -151,5 +162,52 @@ namespace maddweb.Controllers
             }
         }
 
+        [HttpPost("Reset/{contact}")]
+        public IActionResult ResetPassword(int contact)
+        {
+            DbSet<MaddUser> dbs = _dbContext.MaddUser;
+            MaddUser user = dbs.Where(u => u.UserContact == contact).FirstOrDefault();
+            if (user != null)
+            {
+                //Generate new password
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[8];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+
+                var newPass = new String(stringChars);
+
+                user.UserContact = contact;
+                user.UserPw = newPass;
+                if (_dbContext.SaveChanges() == 1)
+                {
+                    const string accountSid = "ACb1d92affbd287f4561171565d6c6f1ed";
+                    const string authToken = "ca81793128262f97f86a87ce9fe7a649";
+
+                    TwilioClient.Init(accountSid, authToken);
+
+                    var message = MessageResource.Create(
+                        body: $"Your password has been resetted to {newPass}.",
+                        from: new Twilio.Types.PhoneNumber("+18015284665"),
+                        to: new Twilio.Types.PhoneNumber($"+65{contact}")
+                    );
+
+                    return Ok(0);
+
+                }
+                else
+                {
+                    return Ok($"User ID: {user.UserID} \n Contact: {user.UserContact} \n Save Changes: {_dbContext.SaveChanges()}");
+                }
+            }
+            else
+            {
+                return Ok("No existing user");
+            }
+        }
     }
 }

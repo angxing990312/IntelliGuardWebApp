@@ -124,7 +124,7 @@ namespace maddweb.Controllers
                 return BadRequest("Incorrect Input");
             }
 
-            string sqlInsert = $"insert into [dbo].[MaddUser] values ('{usr.UserName}','{usr.UserPw}','{usr.UPhotoPath}',{usr.UserContact},'Student');";
+            string sqlInsert = $"insert into MaddUser(UserName, UserPw, UPhotoPath, UserContact, Role) values ('{usr.UserName}','{usr.UserPw}','{usr.UPhotoPath}',{usr.UserContact},'Student');";
             if (DBUtl.ExecSQL(sqlInsert) == 1)
             {
                 List<MaddUser> obj = DBUtl.GetList<MaddUser>($"select UserID from MaddUser where UserName='{usr.UserName}'");
