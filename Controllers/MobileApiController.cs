@@ -196,7 +196,7 @@ namespace maddweb.Controllers
                         to: new Twilio.Types.PhoneNumber($"+65{contact}")
                     );
 
-                    return Ok(0);
+                    return Ok("success");
 
                 }
                 else
