@@ -20,7 +20,7 @@ namespace maddweb.Controllers
         [HttpGet("GetPastWeekCases")]
         public IActionResult GetPastWeekCases()
         {
-            
+            //Test
             var url = $"https://api.smartable.ai/coronavirus/stats/SG?Subscription-Key=3009d4ccc29e4808af1ccc25c69b4d5d";
             /*
             var httpClient = HttpClientFactory.Create();
